@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class BallMovement : MonoBehaviour
 {
@@ -21,11 +23,16 @@ public class BallMovement : MonoBehaviour
     private bool jumping;
     private bool jumpCancelled;
     private float cancelRate = 100;
+
     public static int Lives = 30;
+
     public Vector2 ballPosition;
     public bool isCheckpoint = false;
-    public int score = 0;
+    public static int score = 0;
     private CircleCollider2D circleCollider;
+
+    [SerializeField]
+    private TextMeshProUGUI livesText;
 
     public LayerMask groundLayer;
 
@@ -179,6 +186,7 @@ public class BallMovement : MonoBehaviour
             Deflate();
         }
         transform.position = ballPosition;
+        livesText.text = $"Lives: {Lives}";
         //if(isCheckpoint)
         //{
         //    if(!CanInflate)

@@ -1,10 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CoinScript : MonoBehaviour
 {
-    private BallMovement ball;
+    //private BallMovement ball;
+
+    [SerializeField]
+    private int score;
+
+    [SerializeField]
+    private TextMeshProUGUI scoreText;
 
     private void Start()
     {
@@ -15,10 +23,11 @@ public class CoinScript : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
-            ball.score += 1;
-            GameObject.Find("Main Camera").GetComponent<AudioSource>().Play();
+            BallMovement.score += score;
+            //GameObject.Find("Main Camera").GetComponent<AudioSource>().Play();
             //gameObject.GetComponent<AudioSource>().Play();
             //Debug.Log(ball.score);
+            scoreText.text = $"Score: {BallMovement.score}";
             Destroy(gameObject);
         }
     }

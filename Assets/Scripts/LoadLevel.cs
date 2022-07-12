@@ -24,7 +24,7 @@ public class LoadLevel : MonoBehaviour
         {
             SceneManager.LoadScene(SceneName);
             times.Add(time);
-            scores.Add(ball.score);
+            scores.Add(BallMovement.score);
         }
     }
 
