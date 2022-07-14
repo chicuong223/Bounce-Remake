@@ -48,6 +48,13 @@ public class BallMovement : MonoBehaviour
     //public AudioSource audioSource;
     private float deathHeight = -40f;
 
+    //Fields for ball skin
+    public SkinDatabase skinDatabase;
+
+    public SpriteRenderer artworkSprite;
+
+    private int selectedIndex;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -56,6 +63,16 @@ public class BallMovement : MonoBehaviour
         //audioSource = GetComponent<AudioSource>();
         //audioSource.enabled = true;
         //ballPosition = transform.position;
+        /* Load Skin */
+        if (!PlayerPrefs.HasKey("selectedSkin"))
+        {
+            selectedIndex = 0;
+        }
+        else
+        {
+            Load();
+        }
+        UpdateSkin(selectedIndex);
     }
 
     private void Awake()
@@ -163,12 +180,11 @@ public class BallMovement : MonoBehaviour
         }
         //else if (collision.gameObject.tag.Equals("Platform"))
         //{
-        //    var isTop = CheckSideCollision(collision);
-        //    if (isTop)
-        //    {
-        //        //audioSource.clip = jumpClip;
-        //        CanJump = true;
-        //    }
+        //    //if (isTop)
+        //    //{
+        //    //    //audioSource.clip = jumpClip;
+        //    //}
+        //    transform.SetParent(collision.gameObject.transform, false);
         //}
         //else
         //{
@@ -235,5 +251,16 @@ public class BallMovement : MonoBehaviour
             CanInflate = true;
             jumpForce /= 2;
         }
+    }
+
+    private void UpdateSkin(int selectedOption)
+    {
+        Skin skin = skinDatabase.GetSkin(selectedIndex);
+        artworkSprite.sprite = skin.skinSprite;
+    }
+
+    private void Load()
+    {
+        selectedIndex = PlayerPrefs.GetInt("selectedSkin");
     }
 }
