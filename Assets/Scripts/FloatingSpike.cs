@@ -33,17 +33,6 @@ public class FloatingSpike : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            if (collision.collider.transform.parent == null)
-            {
-                collision.collider.transform.SetParent(transform);
-            }
-        }
-    }
-
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))

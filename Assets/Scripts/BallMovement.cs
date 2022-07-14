@@ -28,7 +28,7 @@ public class BallMovement : MonoBehaviour
 
     public Vector2 ballPosition;
     public bool isCheckpoint = false;
-    public static int score = 0;
+    public static int score;
     private CircleCollider2D circleCollider;
 
     [SerializeField]
@@ -62,7 +62,7 @@ public class BallMovement : MonoBehaviour
         CanInflate = true;
         //audioSource = GetComponent<AudioSource>();
         //audioSource.enabled = true;
-        //ballPosition = transform.position;
+        ballPosition = transform.position;
         /* Load Skin */
         if (!PlayerPrefs.HasKey("selectedSkin"))
         {
@@ -78,7 +78,6 @@ public class BallMovement : MonoBehaviour
     private void Awake()
     {
         circleCollider = GetComponent<CircleCollider2D>();
-        score = 0;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -86,7 +85,9 @@ public class BallMovement : MonoBehaviour
         if (collision.gameObject.tag.Equals("Checkpoint"))
         {
             var checkpoint = collision.gameObject.transform.position;
-            ballPosition = checkpoint;
+            collision.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+            ballPosition.x = checkpoint.x;
+            ballPosition.y = transform.position.y;
             isCheckpoint = true;
         }
     }
@@ -255,7 +256,7 @@ public class BallMovement : MonoBehaviour
 
     private void UpdateSkin(int selectedOption)
     {
-        Skin skin = skinDatabase.GetSkin(selectedIndex);
+        Skin skin = skinDatabase.GetSkin(selectedOption);
         artworkSprite.sprite = skin.skinSprite;
     }
 

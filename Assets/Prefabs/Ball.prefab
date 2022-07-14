@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 50
   m_Sprite: {fileID: 21300000, guid: 05eef2d6174698042b1158316f2bd445, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -137,8 +137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f50e5f091f0af544bbfd590a4877eef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  jumpForce: 10
+  speed: 7
+  jumpForce: 8
   ballPosition: {x: 0, y: 0}
   isCheckpoint: 0
   livesText: {fileID: 0}
@@ -148,8 +148,8 @@ MonoBehaviour:
   jumpClip: {fileID: 0}
   inflateClip: {fileID: 0}
   deadClip: {fileID: 0}
-  skinDatabase: {fileID: 0}
-  artworkSprite: {fileID: 0}
+  skinDatabase: {fileID: 11400000, guid: 5d4c9c41c272bb8429b0edc26473eacf, type: 2}
+  artworkSprite: {fileID: 7234085456654508689}
 --- !u!114 &1981754955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,4 +162,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80c718875b270414fbb06064bfd65461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneID: 0
+  nextSceneID: 3

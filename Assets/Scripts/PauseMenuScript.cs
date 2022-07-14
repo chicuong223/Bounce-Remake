@@ -7,15 +7,19 @@ public class PauseMenuScript : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
 
+    private bool isPaused = false;
+
     public void Pause()
     {
         pauseMenu.SetActive(true);
+        isPaused = true;
         Time.timeScale = 0f;
     }
 
     public void Resume()
     {
         pauseMenu.SetActive(false);
+        isPaused = false;
         Time.timeScale = 1f;
     }
 
@@ -29,7 +33,9 @@ public class PauseMenuScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Pause();
+            isPaused = !isPaused;
         }
+        if (isPaused) Pause();
+        else Resume();
     }
 }
