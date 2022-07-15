@@ -27,7 +27,9 @@ public class BallMovement : MonoBehaviour
     public static int MaxLives = 30;
     public static int Lives = MaxLives;
 
+    [System.NonSerialized]
     public Vector2 ballPosition;
+
     public bool isCheckpoint = false;
     public static int Score;
     private CircleCollider2D circleCollider;
@@ -47,6 +49,7 @@ public class BallMovement : MonoBehaviour
     private AudioClip deadClip;
 
     //public AudioSource audioSource;
+    [SerializeField]
     private float deathHeight = -40f;
 
     //Fields for ball skin
@@ -108,7 +111,7 @@ public class BallMovement : MonoBehaviour
     {
         var h = Input.GetAxisRaw("Horizontal");
         var pos = transform.position;
-        transform.Rotate(Vector3.forward * (-h) * 300 * Time.deltaTime);
+        transform.Rotate(Vector3.forward * (-h) * 600 * Time.deltaTime);
         pos.x += h * speed * Time.deltaTime;
         transform.position = pos;
     }
@@ -125,7 +128,7 @@ public class BallMovement : MonoBehaviour
     private bool isGrounded()
     {
         RaycastHit2D raycastHit =
-            Physics2D.BoxCast(circleCollider.bounds.center, circleCollider.bounds.size, 0, Vector2.down, 0.2f, groundLayer);
+            Physics2D.BoxCast(circleCollider.bounds.center, circleCollider.bounds.size, 0, Vector2.down, 1f, groundLayer);
         return raycastHit.collider != null;
         //Collider2D collider = collision.collider;
         //Vector3 contactPoint = collision.contacts[0].point;

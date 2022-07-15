@@ -7,6 +7,8 @@ public class PauseMenuScript : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
 
+    [SerializeField] private GameObject configMenuCanvas;
+
     private bool isPaused = false;
 
     public void Pause()
@@ -27,6 +29,11 @@ public class PauseMenuScript : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(sceneID);
+    }
+
+    public void OpenConfigMenu()
+    {
+        configMenuCanvas.SetActive(true);
     }
 
     private void Update()
