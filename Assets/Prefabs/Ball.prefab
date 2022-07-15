@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 7
-  jumpForce: 8
+  jumpForce: 6.5
   ballPosition: {x: 0, y: 0}
   isCheckpoint: 0
   livesText: {fileID: 0}
@@ -162,4 +162,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80c718875b270414fbb06064bfd65461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneID: 3
+  nextSceneName: 
+  destroyLevelManager: 0

@@ -23,11 +23,11 @@ public class CoinScript : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Player"))
         {
-            BallMovement.score += score;
+            BallMovement.Score += score;
             //GameObject.Find("Main Camera").GetComponent<AudioSource>().Play();
             //gameObject.GetComponent<AudioSource>().Play();
             //Debug.Log(ball.score);
-            scoreText.text = $"Score: {BallMovement.score}";
+            scoreText.text = $"Score: {BallMovement.Score}";
             Destroy(gameObject);
         }
     }

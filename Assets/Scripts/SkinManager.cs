@@ -23,6 +23,8 @@ public class SkinManager : MonoBehaviour
             Load();
         }
         UpdateSkin(selectedIndex);
+        BallMovement.Score = 0;
+        BallMovement.Lives = BallMovement.MaxLives;
     }
 
     public void NextOption()

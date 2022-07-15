@@ -29,11 +29,11 @@ public class VictoryScript : MonoBehaviour
         {
             highScore = 0;
         }
-        totalScore = BallMovement.score + lifeScore * BallMovement.Lives;
-        scoreText.text = $"Your Score: {BallMovement.score}";
+        totalScore = BallMovement.Score + lifeScore * BallMovement.Lives;
+        scoreText.text = $"Your Score: {BallMovement.Score}";
         livesText.text = $"Remaining Lives: {BallMovement.Lives}";
         highScoreText.text = $"High Score: {highScore}";
-        totalScoreText.text = $"Total score: {BallMovement.score} + {lifeScore} * {BallMovement.Lives} = {totalScore}";
+        totalScoreText.text = $"Total score: {BallMovement.Score} + {lifeScore} * {BallMovement.Lives} = {totalScore}";
         if (totalScore > highScore)
         {
             totalScoreText.text += " (New high score)";

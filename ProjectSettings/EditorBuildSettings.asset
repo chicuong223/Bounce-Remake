@@ -12,13 +12,13 @@ EditorBuildSettings:
     path: Assets/Scenes/SelectSkinScene.unity
     guid: 2ff43f7abb714b844b16622412b5bde2
   - enabled: 1
-    path: Assets/Scenes/Level1.unity
+    path: Assets/Scenes/Level 1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Level2.unity
+    path: Assets/Scenes/Level 2.unity
     guid: db3db19ab2b933f4cb0f26527cd2f2f9
   - enabled: 1
-    path: Assets/Scenes/Level3.unity
+    path: Assets/Scenes/Level 3.unity
     guid: e6ab5c237c3fe1b43aee31f05c50f9be
   - enabled: 1
     path: Assets/Scenes/Victory.unity

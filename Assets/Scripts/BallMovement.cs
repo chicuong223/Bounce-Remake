@@ -24,11 +24,12 @@ public class BallMovement : MonoBehaviour
     private bool jumpCancelled;
     private float cancelRate = 100;
 
-    public static int Lives = 30;
+    public static int MaxLives = 30;
+    public static int Lives = MaxLives;
 
     public Vector2 ballPosition;
     public bool isCheckpoint = false;
-    public static int score;
+    public static int Score;
     private CircleCollider2D circleCollider;
 
     [SerializeField]

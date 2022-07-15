@@ -6,13 +6,25 @@ using UnityEngine.SceneManagement;
 public class LoadLevel : MonoBehaviour
 {
     [SerializeField]
-    private int nextSceneID;
+    private string nextSceneName;
+
+    [SerializeField]
+    private bool destroyLevelManager;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag.Equals("Finish"))
         {
-            SceneManager.LoadScene(nextSceneID);
+            if (destroyLevelManager)
+            {
+                LevelManager.Instance = null;
+                SceneManager.LoadScene(nextSceneName);
+            }
+            //SceneManager.LoadScene(nextSceneID);
+            else if (LevelManager.Instance != null)
+            {
+                LevelManager.Instance.LoadScene(nextSceneName);
+            }
         }
     }
 }

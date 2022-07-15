@@ -15,7 +15,7 @@ public class GameUICanvasScript : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        scoreText.text = $"Score: {BallMovement.score}";
+        scoreText.text = $"Score: {BallMovement.Score}";
         livesText.text = $"Lives: {BallMovement.Lives}";
     }
 }
