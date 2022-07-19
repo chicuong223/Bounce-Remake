@@ -5,16 +5,16 @@ using UnityEngine;
 public class FallingPlatformScript : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private float originalHeight;
-    [SerializeField] private float despawnHeight;
-    private Vector3 originalPosition;
+    //private float originalHeight;
+    //[SerializeField] private float despawnHeight;
+    //private Vector3 originalPosition;
 
     // Start is called before the first frame update
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        originalHeight = transform.position.y;
-        originalPosition = transform.position;
+        //originalHeight = transform.position.y;
+        //originalPosition = transform.position;
         rb.bodyType = RigidbodyType2D.Static;
     }
 
@@ -29,12 +29,12 @@ public class FallingPlatformScript : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Mathf.Abs(transform.position.y - originalHeight) >= despawnHeight)
-        {
-            rb.bodyType = RigidbodyType2D.Static;
-            transform.position = originalPosition;
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Mathf.Abs(transform.position.y - originalHeight) >= despawnHeight)
+    //    {
+    //        rb.bodyType = RigidbodyType2D.Static;
+    //        transform.position = originalPosition;
+    //    }
+    //}
 }

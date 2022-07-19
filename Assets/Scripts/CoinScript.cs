@@ -27,8 +27,18 @@ public class CoinScript : MonoBehaviour
             //GameObject.Find("Main Camera").GetComponent<AudioSource>().Play();
             //gameObject.GetComponent<AudioSource>().Play();
             //Debug.Log(ball.score);
+            GetComponent<AudioSource>().Play();
             scoreText.text = $"Score: {BallMovement.Score}";
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<CircleCollider2D>().enabled = false;
+            StartCoroutine(DestroyCoin());
         }
+    }
+
+    private IEnumerator DestroyCoin()
+    {
+        yield return new WaitForSeconds(5f);
+        Destroy(gameObject);
     }
 }

@@ -15,10 +15,13 @@ public class BulletSpawningScript : MonoBehaviour
     [SerializeField]
     private bool isMovingRight;
 
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     private void Start()
     {
         nextSpawn = 0f;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -27,10 +30,17 @@ public class BulletSpawningScript : MonoBehaviour
         nextSpawn += Time.deltaTime;
         if (nextSpawn > spawnTime)
         {
+            audioSource.Play();
             GameObject projecttileObject
                 = Instantiate(spawnPrefab, transform.position, transform.rotation, transform);
-            Debug.Log(projecttileObject.transform.localScale);
-            projecttileObject.transform.localScale = new Vector2(transform.localScale.x, projecttileObject.transform.localScale.y);
+            if (!isMovingRight)
+            {
+                projecttileObject.transform.localScale = new Vector2(transform.localScale.x, projecttileObject.transform.localScale.y);
+            }
+            else
+            {
+                projecttileObject.transform.localScale = new Vector2(transform.localScale.x * -1, projecttileObject.transform.localScale.y);
+            }
             nextSpawn = 0f;
         }
     }

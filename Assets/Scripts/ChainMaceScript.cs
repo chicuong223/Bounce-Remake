@@ -13,15 +13,18 @@ public class ChainMaceScript : MonoBehaviour
     [SerializeField]
     private LayerMask groundLayer;
 
-    [SerializeField] private float timeToDespawn = 5f;
+    private AudioSource audioSource;
 
     private Vector3 originalPosition;
+
+    [SerializeField] private float despawnDistance;
 
     // Start is called before the first frame update
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
+        audioSource = GetComponent<AudioSource>();
         originalPosition = transform.position;
         rb.bodyType = RigidbodyType2D.Static;
     }
@@ -34,29 +37,45 @@ public class ChainMaceScript : MonoBehaviour
         {
             rb.bodyType = RigidbodyType2D.Dynamic;
         }
-    }
 
-    private void Update()
-    {
         if (isDespawned)
         {
-            StartCoroutine(despawn());
+            if (Mathf.Abs(transform.position.y - originalPosition.y) >= despawnDistance)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
-    private IEnumerator despawn()
+    //private void Update()
+    //{
+    //    if (isDespawned)
+    //    {
+    //        StartCoroutine(despawn());
+    //    }
+    //}
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (isGrounded())
+        if (collision.gameObject.CompareTag("Platform"))
         {
-            yield return new WaitForSeconds(timeToDespawn);
-            rb.bodyType = RigidbodyType2D.Static;
-            transform.position = originalPosition;
-        }
-        else
-        {
-            yield return null;
+            audioSource.Play();
         }
     }
+
+    //private IEnumerator despawn()
+    //{
+    //    if (isGrounded())
+    //    {
+    //        yield return new WaitForSeconds(timeToDespawn);
+    //        rb.bodyType = RigidbodyType2D.Static;
+    //        transform.position = originalPosition;
+    //    }
+    //    else
+    //    {
+    //        yield return null;
+    //    }
+    //}
 
     private bool isGrounded()
     {

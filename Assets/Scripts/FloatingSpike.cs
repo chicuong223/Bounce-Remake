@@ -19,7 +19,7 @@ public class FloatingSpike : MonoBehaviour
         OrigPos = transform.position;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         //Update platform position with ping pong
         transform.position = OrigPos + MoveAxes * Mathf.PingPong(Time.time, Distance);

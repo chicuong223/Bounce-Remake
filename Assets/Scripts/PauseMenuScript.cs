@@ -9,7 +9,20 @@ public class PauseMenuScript : MonoBehaviour
 
     [SerializeField] private GameObject configMenuCanvas;
 
+    private int initialScore;
+
+    private int initialLives;
+
+    private Scene currentScene;
+
     private bool isPaused = false;
+
+    private void Start()
+    {
+        initialScore = BallMovement.Score;
+        initialLives = BallMovement.Lives;
+        currentScene = SceneManager.GetActiveScene();
+    }
 
     public void Pause()
     {
@@ -44,5 +57,15 @@ public class PauseMenuScript : MonoBehaviour
         }
         if (isPaused) Pause();
         else Resume();
+    }
+
+    public void ReloadLevel()
+    {
+        BallMovement.Score = initialScore;
+        BallMovement.Lives = initialLives;
+        if (LevelManager.Instance != null)
+            LevelManager.Instance.LoadScene(currentScene.name);
+        else
+            SceneManager.LoadScene(currentScene.buildIndex);
     }
 }

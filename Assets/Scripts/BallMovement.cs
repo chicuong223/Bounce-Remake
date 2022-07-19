@@ -24,7 +24,7 @@ public class BallMovement : MonoBehaviour
     private bool jumpCancelled;
     private float cancelRate = 100;
 
-    public static int MaxLives = 30;
+    public static int MaxLives = 5;
     public static int Lives = MaxLives;
 
     [System.NonSerialized]
@@ -48,7 +48,8 @@ public class BallMovement : MonoBehaviour
     [SerializeField]
     private AudioClip deadClip;
 
-    //public AudioSource audioSource;
+    private AudioSource audioSource;
+
     [SerializeField]
     private float deathHeight = -40f;
 
@@ -59,13 +60,15 @@ public class BallMovement : MonoBehaviour
 
     private int selectedIndex;
 
+    [SerializeField] private int gameOverSceneIndex;
+
     // Start is called before the first frame update
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         CanInflate = true;
-        //audioSource = GetComponent<AudioSource>();
-        //audioSource.enabled = true;
+        audioSource = GetComponent<AudioSource>();
+        audioSource.enabled = true;
         ballPosition = transform.position;
         /* Load Skin */
         if (!PlayerPrefs.HasKey("selectedSkin"))
@@ -88,11 +91,20 @@ public class BallMovement : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Checkpoint"))
         {
-            var checkpoint = collision.gameObject.transform.position;
-            collision.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
-            ballPosition.x = checkpoint.x;
-            ballPosition.y = transform.position.y;
-            isCheckpoint = true;
+            var checkpoint = collision.gameObject;
+            //collision.gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+            //ballPosition.x = checkpoint.x;
+            //ballPosition.y = transform.position.y;
+            CheckpointScript checkpointScript = checkpoint.GetComponent<CheckpointScript>();
+            if (!checkpointScript.isHit)
+            {
+                checkpointScript.isHit = true;
+                checkpoint.GetComponent<SpriteRenderer>().color = Color.green;
+                checkpoint.GetComponent<AudioSource>().Play();
+                ballPosition.x = checkpoint.transform.position.x;
+                ballPosition.y = transform.position.y;
+            }
+            //isCheckpoint = true;
         }
     }
 
@@ -128,7 +140,7 @@ public class BallMovement : MonoBehaviour
     private bool isGrounded()
     {
         RaycastHit2D raycastHit =
-            Physics2D.BoxCast(circleCollider.bounds.center, circleCollider.bounds.size, 0, Vector2.down, 1f, groundLayer);
+            Physics2D.BoxCast(circleCollider.bounds.center, circleCollider.bounds.size, 0, Vector2.down, 0.8f, groundLayer);
         return raycastHit.collider != null;
         //Collider2D collider = collision.collider;
         //Vector3 contactPoint = collision.contacts[0].point;
@@ -150,6 +162,8 @@ public class BallMovement : MonoBehaviour
                 jumping = true;
                 jumpTime = 0;
                 jumpCancelled = false;
+                audioSource.clip = jumpClip;
+                audioSource.Play();
                 //CanJump = false;
             }
         }
@@ -198,7 +212,7 @@ public class BallMovement : MonoBehaviour
         //audioSource.Play();
     }
 
-    private void Kill()
+    public void Kill()
     {
         //Destroy(gameObject);
         Lives -= 1;
@@ -208,6 +222,12 @@ public class BallMovement : MonoBehaviour
         }
         transform.position = ballPosition;
         livesText.text = $"Lives: {Lives}";
+        audioSource.clip = deadClip;
+        audioSource.Play();
+        if (Lives <= 0)
+        {
+            SceneManager.LoadScene(gameOverSceneIndex);
+        }
         //if(isCheckpoint)
         //{
         //    if(!CanInflate)
