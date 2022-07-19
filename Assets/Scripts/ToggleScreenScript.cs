@@ -20,7 +20,7 @@ public class ToggleScreenScript : MonoBehaviour
         //if (Screen.fullScreen) Screen.fullScreen = false;
         if (Screen.fullScreen)
         {
-            Screen.SetResolution(960, 540, false);
+            Screen.SetResolution(1067, 600, false);
         }
     }
 

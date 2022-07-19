@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e8f73ef8f4bf634f8357ce5132b6bcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioGameObjectName: Audio
+  audioGameObjectName: LevelAudio
